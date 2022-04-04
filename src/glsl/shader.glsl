@@ -15,6 +15,6 @@ void main() {
       float frequency = 1.0 / (pixel_size / radius);
       float squared_spatial_frequency = pow(frequency, 2.0);
       float phase_shift = PI * wavelength * squared_spatial_frequency * (defocus - 0.5 * squared_wavelength * squared_spatial_frequency * spherical_aberration);
-      vec3 color = -sin(phase_shift) * vec3(1.0, 1.0, 1.0);
+      vec3 color = abs(-sin(phase_shift)) * vec3(1.0, 1.0, 1.0);
       gl_FragColor = vec4(color, 1.0);
     }

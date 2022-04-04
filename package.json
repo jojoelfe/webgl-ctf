@@ -12,6 +12,7 @@
   "dependencies": {
     "shader-doodle": "^1.0.0-alpha.20",
     "vue": "^3.2.31",
+    "vue-cli": "^2.9.6",
     "vue-router": "^4.0.14"
   },
   "devDependencies": {

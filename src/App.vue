@@ -1,24 +1,29 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 import HelloWorld from "@/components/HelloWorld.vue";
+import '@spectrum-web-components/slider/sp-slider.js';
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <h1>The Contrast Transfer Function</h1>
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <div class="wrapper">
+    <h1>The Contrast Transfer Function</h1>
+    <sp-slider
+      style="width: 300px"
+      value="8000"
+      max="100000"
+      format-options='{
+        "style": "unit",
+        "unit": "A"
+    }'
+    >Defocus</sp-slider>
+  </div>
 
   <RouterView />
 </template>
 
 <style>
 @import "@/assets/base.css";
+@import "@spectrum-web-components/styles/all-medium-light.css";
 
 #app {
   max-width: 1280px;

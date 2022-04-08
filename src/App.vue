@@ -89,6 +89,12 @@ const voltage = ref(300);
   font-weight: normal;
 }
 
+.wrapper {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  
+}
+
 header {
   line-height: 1.5;
   max-height: 10vh;

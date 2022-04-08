@@ -13,7 +13,7 @@ float precomputed_amplitude_contrast_term = atan(ac/sqrt(1.0-pow(ac,2.0)));
 float spherical_aberration = spherical_aberration_mm * 1000.0 * 10000.0;
 
 float phase_shift(float squared_spatial_frequency) {
-  return PI * wavelength * squared_spatial_frequency * (-defocus - 0.5 * squared_wavelength * squared_spatial_frequency * spherical_aberration) + precomputed_amplitude_contrast_term;
+  return PI * wavelength * squared_spatial_frequency * (defocus - 0.5 * squared_wavelength * squared_spatial_frequency * spherical_aberration) + precomputed_amplitude_contrast_term;
 }
 
 float absolute_amplitude(float phase_shift) {

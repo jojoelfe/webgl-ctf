@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import '@spectrum-web-components/slider/sp-slider.js';
 import Ctf from "@/components/Ctf.vue";
+import slider from "@/components/Slider.vue";
 import { ref } from "vue";
 
-const defocus = ref(8000);
+
+
+const defocus = ref(-8000);
 const pixel_size = ref(1.0);
 const ac = ref(0.07);
 const spherical_aberration = ref(2.7);
 const voltage = ref(300);
+
+function set_defocus(event) {
+  if (!isNaN(event)) {
+    defocus.value = event;
+  }
+}
 </script>
 
 <template>
@@ -15,16 +24,8 @@ const voltage = ref(300);
     
   <div class="wrapper">
     <h1>The Contrast Transfer Function</h1>
-    <sp-slider
-      style="width: 300px"
-      max="100000"
-      value="8000"
-      v-on:input="defocus = $event.target.value"
-      format-options='{
-        "style": "unit",
-        "unit": "Å"
-    }'
-    >Defocus</sp-slider>
+    <slider v-on:input="set_defocus"/>
+    
     <sp-slider
       style="width: 300px"
 
@@ -79,7 +80,7 @@ const voltage = ref(300);
   :spherical_aberration=spherical_aberration :voltage=voltage />
 
 </div>
-  <footer>Built by Johannes Elferich based on math in cisTEM by Tim Grany, Niko
+  <footer>Built by Johannes Elferich based on math in cisTEM by Tim Grant, Niko
   Grigorieff, Ben Himes, and Alexis Rohou</footer>
 </template>
 

@@ -41,7 +41,6 @@ export default {
   },
   mounted() {
     let glslScript = document.createElement('script');
-      console.log(fragment)
       glslScript.textContent = fragment;
       glslScript.setAttribute('type', 'x-shader/x-fragment');
       this.$el.firstChild.appendChild(glslScript);

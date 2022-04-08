@@ -1,11 +1,13 @@
 <template>
   <div class="ctfvis">
-    <shader-doodle width="400px" height="400px" >
+    <shader-doodle width="512" height="512" >
       <sd-uniform name="defocus" :x=defocus type="float" />
+      <sd-uniform name="pixel_size" :x=pixel_size type="float" />
+      <sd-uniform name="ac" :x=ac type="float" />
+      <sd-uniform name="spherical_aberration_mm" :x=spherical_aberration type="float" />
+      <sd-uniform name="voltage" :x=voltage type="float" />
+
     </shader-doodle>
-    <div class="slidecontainer">
-  <input type="range" min="1000" max="10000" v-model=defocus step="10" class="slider" id="myRange">
-    </div>
   </div>
 </template>
 
@@ -15,15 +17,27 @@ import 'shader-doodle';
 import fragment from '../glsl/shader.glsl';
 
 export default {
-  data() {
-    return {
-      defocus: 30000,
-    };
-  },
-  methods: {
-    doIt() {
-      console.log(`Hello ${this.name}`);
+  props: {
+    defocus: {
+      type: Number,
+      default: 8000
     },
+    pixel_size: {
+      type: Number,
+      default: 2.0
+    },
+    ac: {
+      type: Number,
+      default: 0.07
+    },
+    spherical_aberration: {
+      type: Number,
+      default: 2.7
+    },
+    voltage: {
+      type: Number,
+      default: 300
+    }
   },
   mounted() {
     let glslScript = document.createElement('script');

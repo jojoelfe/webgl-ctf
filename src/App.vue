@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "@/components/HelloWorld.vue";
 import '@spectrum-web-components/slider/sp-slider.js';
+import Ctf from "@/components/Ctf.vue";
+import { ref } from "vue";
+
+const defocus = ref(8000);
+const pixel_size = ref(1.0);
+const ac = ref(0.07);
+const spherical_aberration = ref(2.7);
+const voltage = ref(300);
 </script>
 
 <template>
@@ -9,16 +15,66 @@ import '@spectrum-web-components/slider/sp-slider.js';
     <h1>The Contrast Transfer Function</h1>
     <sp-slider
       style="width: 300px"
-      value="8000"
       max="100000"
+      value="8000"
+      v-on:input="defocus = $event.target.value"
       format-options='{
         "style": "unit",
         "unit": "A"
     }'
     >Defocus</sp-slider>
+    <sp-slider
+      style="width: 300px"
+
+      max="10"
+      step="0.1"
+      value="1.0"
+      v-on:input="pixel_size = $event.target.value"
+      format-options='{
+        "style": "unit",
+        "unit": "A"
+    }'
+    >Pixel size</sp-slider>
+    <sp-slider
+      style="width: 300px"
+
+      max="1"
+      step="0.01"
+      value="0.07"
+      v-on:input="ac = $event.target.value"
+      format-options='{
+        "style": "unit",
+        "unit": ""
+    }'
+    >Amplitude contrast</sp-slider>
+    <sp-slider
+      style="width: 300px"
+
+      max="10.0"
+      step="0.05"
+      value="2.7"
+      v-on:input="spherical_aberration = $event.target.value"
+      format-options='{
+        "style": "unit",
+        "unit": "mm"
+    }'
+    >Spherical Aberration</sp-slider>
+    <sp-slider
+      style="width: 300px"
+
+      max="1000"
+      step="10"
+      value="300"
+      v-on:input="voltage = $event.target.value"
+      format-options='{
+        "style": "unit",
+        "unit": "kV"
+    }'
+    >Voltage</sp-slider>
   </div>
 
-  <RouterView />
+  <Ctf :defocus=defocus :pixel_size=pixel_size :ac=ac
+  :spherical_aberration=spherical_aberration :voltage=voltage />
 </template>
 
 <style>

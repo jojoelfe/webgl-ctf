@@ -11,6 +11,8 @@ const voltage = ref(300);
 </script>
 
 <template>
+  <div class="main">
+    
   <div class="wrapper">
     <h1>The Contrast Transfer Function</h1>
     <sp-slider
@@ -20,7 +22,7 @@ const voltage = ref(300);
       v-on:input="defocus = $event.target.value"
       format-options='{
         "style": "unit",
-        "unit": "A"
+        "unit": "Å"
     }'
     >Defocus</sp-slider>
     <sp-slider
@@ -32,7 +34,7 @@ const voltage = ref(300);
       v-on:input="pixel_size = $event.target.value"
       format-options='{
         "style": "unit",
-        "unit": "A"
+        "unit": "Å"
     }'
     >Pixel size</sp-slider>
     <sp-slider
@@ -75,6 +77,10 @@ const voltage = ref(300);
 
   <Ctf :defocus=defocus :pixel_size=pixel_size :ac=ac
   :spherical_aberration=spherical_aberration :voltage=voltage />
+
+</div>
+  <footer>Built by Johannes Elferich based on math in cisTEM by Tim Grany, Niko
+  Grigorieff, Ben Himes, and Alexis Rohou</footer>
 </template>
 
 <style>
@@ -85,14 +91,28 @@ const voltage = ref(300);
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-
+  display:flex; 
+  flex-direction:column; 
   font-weight: normal;
+  min-height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+footer {
+  margin-top: auto;
 }
 
 .wrapper {
   margin-left: 2rem;
   margin-right: 2rem;
-  
+
 }
 
 header {
@@ -147,6 +167,14 @@ nav a:first-of-type {
   body {
     display: flex;
     place-items: center;
+  }
+
+  .main {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
 
   #app {

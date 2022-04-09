@@ -1,105 +1,123 @@
 <script setup lang="ts">
-import '@spectrum-web-components/slider/sp-slider.js';
-import '@spectrum-web-components/radio/sp-radio.js';
-import '@spectrum-web-components/radio/sp-radio-group.js';
-import Ctf from "@/components/Ctf.vue";
+import "@spectrum-web-components/slider/sp-slider.js";
+import "@spectrum-web-components/radio/sp-radio.js";
+import "@spectrum-web-components/radio/sp-radio-group.js";
 import slider from "@/components/Slider.vue";
-import { RouterView, RouterLink } from 'vue-router';
+import { RouterView, RouterLink } from "vue-router";
 import { ref } from "vue";
-
-
 
 const defocus = ref(-8000);
 const pixel_size = ref(1.0);
 const ac = ref(0.07);
 const spherical_aberration = ref(2.7);
 const voltage = ref(300);
-const shader = ref('abs_amp');
+const astigmatism = ref(0);
+const astigmatism_angle = ref(0);
 
 function set_defocus(event) {
   if (!isNaN(event)) {
     defocus.value = event;
   }
 }
-
-function shader_change(event) {
-  // Check event is not undefined
-  if (event !== undefined) {
-    shader.value = event;
-  }
-}
 </script>
 
 <template>
   <div class="main">
-    
-  <div class="wrapper">
-    <h1>The Contrast Transfer Function</h1>
-    <slider v-on:input="set_defocus"/>
-    
-    <sp-slider
-      style="width: 300px"
-
-      max="10"
-      step="0.1"
-      value="1.0"
-      v-on:input="pixel_size = $event.target.value"
-      format-options='{
+    <div class="wrapper">
+      <h1>The Contrast Transfer Function</h1>
+      <slider v-on:input="set_defocus" />
+      <sp-slider
+        style="width: 300px"
+        max="100000"
+        step="100"
+        value="0.0"
+        v-on:input="astigmatism = $event.target.value"
+        format-options='{
         "style": "unit",
         "unit": "Å"
     }'
-    >Pixel size</sp-slider>
-    <sp-slider
-      style="width: 300px"
-
-      max="1"
-      step="0.01"
-      value="0.07"
-      v-on:input="ac = $event.target.value"
-      format-options='{
+        >Astigmatism</sp-slider
+      >
+      <sp-slider
+        style="width: 300px"
+        max="180"
+        step="1"
+        value="0"
+        v-on:input="astigmatism_angle = $event.target.value"
+        format-options='{
+        "style": "unit",
+        "unit": "°"
+    }'
+        >Astigmatism angle</sp-slider
+      >
+      <sp-slider
+        style="width: 300px"
+        max="10"
+        step="0.1"
+        value="1.0"
+        v-on:input="pixel_size = $event.target.value"
+        format-options='{
+        "style": "unit",
+        "unit": "Å"
+    }'
+        >Pixel size</sp-slider
+      >
+      <sp-slider
+        style="width: 300px"
+        max="1"
+        step="0.01"
+        value="0.07"
+        v-on:input="ac = $event.target.value"
+        format-options='{
         "style": "unit",
         "unit": ""
     }'
-    >Amplitude contrast</sp-slider>
-    <sp-slider
-      style="width: 300px"
-
-      max="10.0"
-      step="0.05"
-      value="2.7"
-      v-on:input="spherical_aberration = $event.target.value"
-      format-options='{
+        >Amplitude contrast</sp-slider
+      >
+      <sp-slider
+        style="width: 300px"
+        max="10.0"
+        step="0.05"
+        value="2.7"
+        v-on:input="spherical_aberration = $event.target.value"
+        format-options='{
         "style": "unit",
         "unit": "mm"
     }'
-    >Spherical aberration</sp-slider>
-    <sp-slider
-      style="width: 300px"
-
-      max="1000"
-      step="10"
-      value="300"
-      v-on:input="voltage = $event.target.value"
-      format-options='{
+        >Spherical aberration</sp-slider
+      >
+      <sp-slider
+        style="width: 300px"
+        max="1000"
+        step="10"
+        value="300"
+        v-on:input="voltage = $event.target.value"
+        format-options='{
         "style": "unit",
         "unit": "kV"
     }'
-    >Voltage</sp-slider>
-     <nav>
+        >Voltage</sp-slider
+      >
+      <nav>
         <RouterLink to="/">Absolute amplitude</RouterLink>
         <RouterLink to="/amp">Amplitude</RouterLink>
       </nav>
+    </div>
+
+    <RouterView
+      :defocus="defocus"
+      :pixel_size="pixel_size"
+      :ac="ac"
+      :spherical_aberration="spherical_aberration"
+      :voltage="voltage"
+      :astigmatism="astigmatism"
+      :astigmatism_angle="astigmatism_angle"
+    />
   </div>
-
-  <RouterView :defocus=defocus :pixel_size=pixel_size :ac=ac
-  :spherical_aberration=spherical_aberration :voltage=voltage
-   />
-
-  
-
-</div>
-  <footer>Built by Johannes Elferich based on math in cisTEM by Tim Grant, Niko
-  Grigorieff, Ben Himes, and Alexis Rohou</footer>
+  <footer>
+    Built by Johannes Elferich based on math in cisTEM by Tim Grant, Niko
+    Grigorieff, Ben Himes, and Alexis Rohou
+  </footer>
 </template>
 
 <style>
@@ -110,8 +128,8 @@ function shader_change(event) {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  display:flex; 
-  flex-direction:column; 
+  display: flex;
+  flex-direction: column;
   font-weight: normal;
   min-height: 100vh;
 }
@@ -131,7 +149,6 @@ footer {
 .wrapper {
   margin-left: 2rem;
   margin-right: 2rem;
-
 }
 
 header {
@@ -189,7 +206,6 @@ nav a:first-of-type {
   }
 
   .main {
-
     display: flex;
     flex-direction: row;
     align-items: center;

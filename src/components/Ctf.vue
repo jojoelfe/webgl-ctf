@@ -14,7 +14,8 @@
 <script lang="ts">
 import { onMounted } from '@vue/runtime-core';
 import 'shader-doodle';
-import fragment from '../glsl/shader.glsl';
+import abs_amp_fragment from '../glsl/abs_amp.glsl';
+import amp_fragment from '../glsl/amp.glsl';
 
 export default {
   props: {
@@ -38,12 +39,30 @@ export default {
       type: Number,
       default: 300
     }
+   
+  },
+ 
+  methods: {
+    switch_shader: (shader,el) => {
+
+      if (document.getElementById('glsl-script') !== null) {
+              document.getElementById('glsl-script').remove();
+
+      }
+    let glslScript = document.createElement('script');
+    glslScript.id = 'glsl-script';
+    glslScript.textContent = shader;
+    glslScript.setAttribute('type', 'x-shader/x-fragment');
+    el.firstChild.appendChild(glslScript);
+    }
   },
   mounted() {
-    let glslScript = document.createElement('script');
-      glslScript.textContent = fragment;
-      glslScript.setAttribute('type', 'x-shader/x-fragment');
-      this.$el.firstChild.appendChild(glslScript);
+    console.log(this.$route.name);
+    if (this.$route.name == 'amp') {
+        this.switch_shader(amp_fragment,this.$el);
+      } else {
+        this.switch_shader(abs_amp_fragment,this.$el);
+      }
   },
 };
 

@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import '@spectrum-web-components/slider/sp-slider.js';
+import '@spectrum-web-components/radio/sp-radio.js';
+import '@spectrum-web-components/radio/sp-radio-group.js';
 import Ctf from "@/components/Ctf.vue";
 import slider from "@/components/Slider.vue";
+import { RouterView, RouterLink } from 'vue-router';
 import { ref } from "vue";
 
 
@@ -11,10 +14,18 @@ const pixel_size = ref(1.0);
 const ac = ref(0.07);
 const spherical_aberration = ref(2.7);
 const voltage = ref(300);
+const shader = ref('abs_amp');
 
 function set_defocus(event) {
   if (!isNaN(event)) {
     defocus.value = event;
+  }
+}
+
+function shader_change(event) {
+  // Check event is not undefined
+  if (event !== undefined) {
+    shader.value = event;
   }
 }
 </script>
@@ -61,7 +72,7 @@ function set_defocus(event) {
         "style": "unit",
         "unit": "mm"
     }'
-    >Spherical Aberration</sp-slider>
+    >Spherical aberration</sp-slider>
     <sp-slider
       style="width: 300px"
 
@@ -74,10 +85,17 @@ function set_defocus(event) {
         "unit": "kV"
     }'
     >Voltage</sp-slider>
+     <nav>
+        <RouterLink to="/">Absolute amplitude</RouterLink>
+        <RouterLink to="/amp">Amplitude</RouterLink>
+      </nav>
   </div>
 
-  <Ctf :defocus=defocus :pixel_size=pixel_size :ac=ac
-  :spherical_aberration=spherical_aberration :voltage=voltage />
+  <RouterView :defocus=defocus :pixel_size=pixel_size :ac=ac
+  :spherical_aberration=spherical_aberration :voltage=voltage
+   />
+
+  
 
 </div>
   <footer>Built by Johannes Elferich based on math in cisTEM by Tim Grant, Niko

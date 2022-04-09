@@ -20,15 +20,17 @@ float absolute_amplitude(float phase_shift) {
   return abs(-sin(phase_shift));
 }
 
+float amplitude(float phase_shift) {
+  return -sin(phase_shift);
+}
+
+vec3 palette(in float t, in vec3 a, in vec3 b, in vec3 c, in vec3 d) {
+  return a + b * cos(6.28318 * (c * t + d));
+}
+
 float squared_spatial_frequency(vec2 st) {
   vec2 dis = (st - 0.5);    
   float radius = length(dis);
   float frequency = 1.0 / (pixel_size / radius);
   return pow(frequency, 2.0);
 }
-
-void main() {
-      vec2 st = (gl_FragCoord.xy / u_resolution.xy) ;
-      vec3 color = absolute_amplitude(phase_shift(squared_spatial_frequency(st))) * vec3(1.0, 1.0, 1.0);
-      gl_FragColor = vec4(color, 1.0);
-    }

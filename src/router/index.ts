@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Ctf from "../components/CtfCanvas.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,25 +6,25 @@ const router = createRouter({
     {
       path: "/",
       name: "abs_amp",
-      component: Ctf,
+      component: () => import("../views/AbsAmpView.vue"),
     },
     {
       path: "/amp",
       name: "amp",
       
-      component: { extends: Ctf },
+      component: () => import("../views/AmpView.vue"),
     },
     {
       path: "/imag",
       name: "imag",
 
-      component: { extends: Ctf },
+      component: () => import("../views/ImagView.vue"),
     },
     {
       path: "/phase",
       name: "phase",
 
-      component: { extends: Ctf },
+      component: () => import("../views/PhaseView.vue"),
     },
   ],
 });

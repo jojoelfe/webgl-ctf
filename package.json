@@ -12,6 +12,7 @@
   "dependencies": {
     "@spectrum-web-components/radio": "^0.9.8",
     "@spectrum-web-components/slider": "^0.12.8",
+    "pinia": "^2.0.13",
     "shader-doodle": "^1.0.0-alpha.20",
     "vue": "^3.2.31",
     "vue-router": "^4.0.14"

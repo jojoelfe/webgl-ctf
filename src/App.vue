@@ -5,18 +5,15 @@ import "@spectrum-web-components/radio/sp-radio-group.js";
 import slider from "@/components/Slider.vue";
 import { RouterView, RouterLink } from "vue-router";
 import { ref } from "vue";
+import { useParameterStore } from '@/stores/parameters';
 
-const defocus = ref(-8000);
-const pixel_size = ref(1.0);
-const ac = ref(0.07);
-const spherical_aberration = ref(2.7);
-const voltage = ref(300);
-const astigmatism = ref(0);
-const astigmatism_angle = ref(0);
+
+const parameters = useParameterStore();
+
 
 function set_defocus(event) {
   if (!isNaN(event)) {
-    defocus.value = event;
+    parameters.defocus = event;
   }
 }
 </script>
@@ -31,7 +28,7 @@ function set_defocus(event) {
         max="100000"
         step="100"
         value="0.0"
-        v-on:input="astigmatism = $event.target.value"
+        v-on:input="parameters.astigmatism = $event.target.value"
         format-options='{
         "style": "unit",
         "unit": "Å"
@@ -43,7 +40,7 @@ function set_defocus(event) {
         max="180"
         step="1"
         value="0"
-        v-on:input="astigmatism_angle = $event.target.value"
+        v-on:input="parameters.astigmatism_angle = $event.target.value"
         format-options='{
         "style": "unit",
         "unit": "°"
@@ -55,7 +52,7 @@ function set_defocus(event) {
         max="10"
         step="0.1"
         value="1.0"
-        v-on:input="pixel_size = $event.target.value"
+        v-on:input="parameters.pixel_size = $event.target.value"
         format-options='{
         "style": "unit",
         "unit": "Å"
@@ -67,7 +64,7 @@ function set_defocus(event) {
         max="1"
         step="0.01"
         value="0.07"
-        v-on:input="ac = $event.target.value"
+        v-on:input="parameters.ac = $event.target.value"
         format-options='{
         "style": "unit",
         "unit": ""
@@ -79,7 +76,7 @@ function set_defocus(event) {
         max="10.0"
         step="0.05"
         value="2.7"
-        v-on:input="spherical_aberration = $event.target.value"
+        v-on:input="parameters.spherical_aberration = $event.target.value"
         format-options='{
         "style": "unit",
         "unit": "mm"
@@ -91,7 +88,7 @@ function set_defocus(event) {
         max="1000"
         step="10"
         value="300"
-        v-on:input="voltage = $event.target.value"
+        v-on:input="parameters.voltage = $event.target.value"
         format-options='{
         "style": "unit",
         "unit": "kV"
@@ -106,15 +103,7 @@ function set_defocus(event) {
       </nav>
     </div>
 
-    <RouterView
-      :defocus="defocus"
-      :pixel_size="pixel_size"
-      :ac="ac"
-      :spherical_aberration="spherical_aberration"
-      :voltage="voltage"
-      :astigmatism="astigmatism"
-      :astigmatism_angle="astigmatism_angle"
-    />
+    <RouterView />
   </div>
   <footer>
     Built by Johannes Elferich based on math in cisTEM by Tim Grant, Niko

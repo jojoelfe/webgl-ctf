@@ -1,6 +1,5 @@
 <script lang="ts">
 import { Slider } from "@spectrum-web-components/slider";
-console.log(Slider);
 class MySlider extends Slider {
   public get ariaValueText(): string {
     return `${this.value - 100000}Å`;

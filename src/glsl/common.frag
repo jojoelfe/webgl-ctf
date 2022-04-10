@@ -10,8 +10,8 @@ uniform float ac;
 uniform float spherical_aberration_mm;
 float precomputed_amplitude_contrast_term = atan(ac/sqrt(1.0-pow(ac,2.0)));
 uniform float astigmatism;
-float defocus_1 = defocus - astigmatism/2.0;
-float defocus_2 = defocus + astigmatism/2.0;
+float defocus_1 = - defocus - astigmatism/2.0;
+float defocus_2 = - defocus + astigmatism/2.0;
 uniform float astigmatism_angle;
 
 float astigmatism_azimuth = astigmatism_angle / 180.0 * PI;
@@ -32,6 +32,10 @@ float absolute_amplitude(float phase_shift) {
 
 float amplitude(float phase_shift) {
   return -sin(phase_shift);
+}
+
+float imaginary_amplitude(float phase_shift) {
+  return -cos(phase_shift);
 }
 
 vec3 palette(in float t, in vec3 a, in vec3 b, in vec3 c, in vec3 d) {

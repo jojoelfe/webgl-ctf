@@ -12,9 +12,19 @@ const router = createRouter({
     {
       path: "/amp",
       name: "amp",
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      
+      component: { extends: Ctf },
+    },
+    {
+      path: "/imag",
+      name: "imag",
+
+      component: { extends: Ctf },
+    },
+    {
+      path: "/phase",
+      name: "phase",
+
       component: { extends: Ctf },
     },
   ],

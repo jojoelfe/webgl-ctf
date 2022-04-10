@@ -101,6 +101,8 @@ function set_defocus(event) {
       <nav>
         <RouterLink to="/">Absolute amplitude</RouterLink>
         <RouterLink to="/amp">Amplitude</RouterLink>
+        <RouterLink to="/imag">Imaginary</RouterLink>
+        <RouterLink to="/phase">Phase shift</RouterLink>
       </nav>
     </div>
 

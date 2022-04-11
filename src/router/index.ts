@@ -26,6 +26,12 @@ const router = createRouter({
 
       component: () => import("../views/PhaseView.vue"),
     },
+    {
+      path: "/image_abb",
+      name: "image_abb",
+
+      component: () => import("../views/ImageAberrationView.vue"),
+    },
   ],
 });
 

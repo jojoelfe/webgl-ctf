@@ -35,6 +35,7 @@
     "vite": "^2.9.1",
     "vite-plugin-glsl": "^0.1.2",
     "vitest": "^0.8.1",
+    "vue-drawing-canvas": "^1.0.9",
     "vue-tsc": "^0.33.9"
   }
 }

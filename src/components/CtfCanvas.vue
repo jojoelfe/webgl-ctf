@@ -18,9 +18,7 @@ const props = defineProps({
 
 function set_shader() {
   let el = ctfvis.value;
-  if (document.getElementById("glsl-script") !== null) {
-    document.getElementById("glsl-script").remove();
-  }
+
   let glslScript = document.createElement("script");
   glslScript.id = "glsl-script";
   glslScript.textContent = props.shader;
@@ -91,5 +89,9 @@ onMounted(() => {
   width: 30px;
   height: 512px;
   margin-left: 30px;
+}
+shader-doodle {
+  max-width: 100%;
+  max-height: 100%;
 }
 </style>

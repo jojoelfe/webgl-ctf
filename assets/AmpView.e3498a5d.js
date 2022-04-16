@@ -1,4 +1,4 @@
-import{_ as a}from"./CtfCanvas.b87697c3.js";import{d as t,o as e,c as n,a as s,u as i}from"./index.6ed4ddf2.js";var o=`#define PI 3.1415926538
+import{_ as a}from"./CtfCanvas.1716aabe.js";import{d as t,o as n,c as e,a as s,u as i}from"./index.97525bb1.js";var o=`#define PI 3.1415926538
 
 uniform float pixel_size;
 uniform float voltage;
@@ -64,6 +64,11 @@ float azimuth(vec2 st) {
 
 void main() {
       vec2 st = (gl_FragCoord.xy / u_resolution.xy) ;
-      vec3 color = absolute_amplitude(phase_shift(squared_spatial_frequency(st),azimuth(st))) * vec3(1.0, 1.0, 1.0);
+      vec3 color = palette(((amplitude(phase_shift(squared_spatial_frequency(st),azimuth(st)))-1.0)/(-2.0)), 
+      vec3(0.66,0.56,0.68), 
+      vec3(0.718,0.438,0.72), 
+      vec3(0.52,0.8,0.52),
+      vec3(-0.43,-0.397,-0.083));
+
       gl_FragColor = vec4(color, 1.0);
-    }`;const m=t({setup(r){return(l,u)=>(e(),n("main",null,[s(a,{shader:i(o)},null,8,["shader"])]))}});export{m as default};
+    }`;const _=t({setup(r){return(l,u)=>(n(),e("main",null,[s(a,{shader:i(o)},null,8,["shader"])]))}});export{_ as default};

@@ -23,7 +23,10 @@ jobs:
       - name: Install and build
         run: |
           npm install
-          npm run build 
+          npm run build
+      - name: create 404 page
+        run: |
+          cp index.html dist/404.html 
       - name: Deploy to github pages
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:

@@ -1,4 +1,4 @@
-import{_ as a}from"./CtfCanvas.acaea4d2.js";import{d as t,o as e,c as n,a as i,u as s}from"./index.5cad1641.js";var o=`#define PI 3.1415926538
+import{_ as a}from"./CtfCanvas.b87697c3.js";import{d as t,o as e,c as n,a as i,u as s}from"./index.6ed4ddf2.js";var o=`#define PI 3.1415926538
 
 uniform float pixel_size;
 uniform float voltage;

@@ -42,7 +42,7 @@ onMounted(() => {
     data[i * 4 + 3] = 255;
   }
   ctx.putImageData(imgData, 0, 0);
-
+  //ctfvis.value.firstChild.surface.dom.id = "CTFCanvas";
 });
 
 </script>

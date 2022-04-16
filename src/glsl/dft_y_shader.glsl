@@ -23,12 +23,12 @@ void main() {
     {
         float a = -(tau * w * n) / SIZE;
         
-        vec2 xn = vec2(texture2D(u_dft_x, vec2(uv.x / u_resolution.x, n/ u_resolution.y)).x,0.0);
+        vec2 xn = texture2D(u_dft_x, vec2((uv.x+0.5) / u_resolution.x, (n+0.5)/ u_resolution.y)).xy;
         
         xw += cmul(xn, polar(1.0, a));
     }
     
-    gl_FragColor = vec4(xw,0,1.0);
+    gl_FragColor = vec4(xw,0.0,1.0);
       
       
     }

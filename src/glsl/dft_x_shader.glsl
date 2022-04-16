@@ -23,7 +23,7 @@ void main() {
     {
         float a = -(tau * w * n) / SIZE;
         
-        vec2 xn = vec2(texture2D(u_texture0, vec2(n / u_resolution.x, uv.y/ u_resolution.y)).x,0.0);
+        vec2 xn = vec2(texture2D(u_texture0, vec2((n+0.5n) / u_resolution.x, (uv.y+0.5)/ u_resolution.y)).x,0.0);
         
         xw += cmul(xn, polar(1.0, a));
     }

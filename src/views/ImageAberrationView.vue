@@ -8,7 +8,9 @@ import { onMounted } from "vue";
 
 const drawing_div = ref(null);
 const drawing_canvas = ref(null);
+const VueCanvasDrawing = ref(null);
 const image = ref(null);
+const backgroundImage = ref(null);
 
 onMounted(() => {
   drawing_canvas.value = drawing_div.value.firstChild;
@@ -18,15 +20,25 @@ watch(image, function (newVal, oldVal) {
   console.log(drawing_canvas.value);
 });
 
+async function setImage(event) {
+  let URL = window.URL;
+  backgroundImage.value = URL.createObjectURL(event.target.files[0]);
+  await VueCanvasDrawing.value.redraw();
+}
+
 </script>
 
 <template>
   <main>
     <div class="tile">
-      <h4>Draw or <a>Upload image</a></h4>
+      <h4>Draw or <label for="file-upload" class="custom-file-upload">
+          Upload Image
+        </label>
+        <input id="file-upload" type="file" @change="setImage($event)" />
+      </h4>
       <div class="scale">
         <div ref="drawing_div">
-          <VueDrawingCanvas v-model:image="image" width="512" height="512" :styles="{
+          <VueDrawingCanvas ref="VueCanvasDrawing" v-model:image="image" width="512" height="512" :background-image="backgroundImage" :styles="{
             'border': 'solid 1px #000'
           }" />
         </div>
@@ -67,6 +79,7 @@ main {
   /* Set ap to 2rem */
   grid-gap: 2rem;
 }
+
 .scale {
   transform: scale(0.5);
   margin: -130px;
@@ -74,5 +87,20 @@ main {
 
 .tile h4 {
   text-align: center;
+}
+
+label {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+label:hover {
+  background-color: hsla(160, 100%, 37%, 0.2);
+}
+
+input {
+  display: none
 }
 </style>

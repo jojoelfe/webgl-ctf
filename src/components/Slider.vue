@@ -15,7 +15,7 @@ customElements.define("my-slider", MySlider);
     max="200000"
     min="0"
     value="92000"
-    step="100"
+    step="500"
     v-on:input="$emit('input', $event.target.value - 100000)"
     >Defocus</my-slider
   >

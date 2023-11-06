@@ -13,21 +13,24 @@ const parameters = useParameterStore();
 
 function set_defocus(event) {
   if (!isNaN(event)) {
+    console.log(event);
     parameters.defocus = event;
   }
 }
 </script>
 
 <template>
+  <h1>The Contrast Transfer Function</h1>
   <div class="main">
     <div class="wrapper">
-      <h1>The Contrast Transfer Function</h1>
+      
       <slider v-on:input="set_defocus" />
       <sp-slider
-        style="width: 300px"
+        style="width: 250px"
         max="100000"
         step="100"
         value="0.0"
+        v-on:change="parameters.astigmatism = $event.target.value"
         v-on:input="parameters.astigmatism = $event.target.value"
         format-options='{
         "style": "unit",
@@ -36,10 +39,11 @@ function set_defocus(event) {
         >Astigmatism</sp-slider
       >
       <sp-slider
-        style="width: 300px"
+        style="width: 250px"
         max="180"
         step="1"
         value="0"
+        v-on:change="parameters.astigmatism_angle = $event.target.value"
         v-on:input="parameters.astigmatism_angle = $event.target.value"
         format-options='{
         "style": "unit",
@@ -48,10 +52,11 @@ function set_defocus(event) {
         >Astigmatism angle</sp-slider
       >
       <sp-slider
-        style="width: 300px"
+        style="width: 250px"
         max="10"
         step="0.1"
         value="1.0"
+        v-on:change="parameters.pixel_size = $event.target.value"
         v-on:input="parameters.pixel_size = $event.target.value"
         format-options='{
         "style": "unit",
@@ -60,10 +65,11 @@ function set_defocus(event) {
         >Pixel size</sp-slider
       >
       <sp-slider
-        style="width: 300px"
+        style="width: 250px"
         max="1"
         step="0.01"
         value="0.07"
+        v-on:change="parameters.ac = $event.target.value"
         v-on:input="parameters.ac = $event.target.value"
         format-options='{
         "style": "unit",
@@ -72,10 +78,11 @@ function set_defocus(event) {
         >Amplitude contrast</sp-slider
       >
       <sp-slider
-        style="width: 300px"
+        style="width: 250px"
         max="10.0"
         step="0.05"
         value="2.7"
+        v-on:change="parameters.spherical_aberration = $event.target.value"
         v-on:input="parameters.spherical_aberration = $event.target.value"
         format-options='{
         "style": "unit",
@@ -84,32 +91,25 @@ function set_defocus(event) {
         >Spherical aberration</sp-slider
       >
       <sp-slider
-        style="width: 300px"
+        style="width: 250px"
         max="1000"
         step="10"
         value="300"
+        v-on:change="parameters.voltage = $event.target.value"
         v-on:input="parameters.voltage = $event.target.value"
+
         format-options='{
         "style": "unit",
         "unit": "kV"
     }'
         >Voltage</sp-slider
       >
-      <nav>
-        <RouterLink to="/">Absolute amplitude</RouterLink>
-        <RouterLink to="/amp">Amplitude</RouterLink>
-        <RouterLink to="/imag">Imaginary</RouterLink>
-        <RouterLink to="/phase">Phase shift</RouterLink>
-        <RouterLink to="/image_abb">Image abberation</RouterLink>
-      </nav>
+      
     </div>
 
     <RouterView />
   </div>
-  <footer>
-    Built by Johannes Elferich based on math in cisTEM by Tim Grant, Niko
-    Grigorieff, Ben Himes, and Alexis Rohou
-  </footer>
+  
 </template>
 
 <style>
@@ -191,7 +191,7 @@ nav a:first-of-type {
   border: 0;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 800px) {
   body {
     display: flex;
     place-items: center;

@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 
 export const useParameterStore = defineStore('parameters', {
   state: () => {
-    return {  defocus: -8000,
+    return {  
+        defocus: 0.0,
         pixel_size: 1.0,
         ac: 0.07,
          spherical_aberration: 2.7,

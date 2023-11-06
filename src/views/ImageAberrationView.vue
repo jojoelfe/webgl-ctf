@@ -5,6 +5,9 @@ import ReglFftCtfCanvas from '../components/ReglFftCtfCanvas.vue';
 import RealSpaceCtfCanvas from '@/components/RealSpaceCtfCanvas.vue';
 import { ref, watch } from 'vue';
 import { onMounted } from "vue";
+import Ctf from "@/components/CtfCanvas.vue";
+import abs_amp_fragment from "../glsl/abs_amp.glsl";
+import CtfChartVue from '@/components/CtfChart.vue';
 
 const drawing_div = ref(null);
 const drawing_canvas = ref(null);
@@ -14,16 +17,17 @@ const backgroundImage = ref(null);
 
 onMounted(() => {
   drawing_canvas.value = drawing_div.value.firstChild;
+  setImage("http://localhost:3000/webgl-ctf/slicer000.png");
 });
 
 watch(image, function (newVal, oldVal) {
   console.log(drawing_canvas.value);
 });
 
-async function setImage(event) {
+async function setImage(url) {
   let URL = window.URL;
-  backgroundImage.value = URL.createObjectURL(event.target.files[0]);
-  await VueCanvasDrawing.value.redraw();
+  backgroundImage.value = url;
+  await VueDrawingCanvas.value.redraw();
 }
 
 </script>
@@ -31,25 +35,28 @@ async function setImage(event) {
 <template>
   <main>
     <div class="tile">
-      <h4>Draw or <label for="file-upload" class="custom-file-upload">
-          Upload Image
-        </label>
-        <input id="file-upload" type="file" @change="setImage($event)" />
-      </h4>
+      <h4>1D CTF</h4>
+      <div style="height:200px;">
+      <CtfChartVue></CtfChartVue>
+    </div>
+    </div>
+   
+    <div class="tile">
+      <h4>2D Powerspectrum</h4>
+      <div class="scalemore">
+        <div>
+          <Ctf :shader="abs_amp_fragment" />
+        </div>
+      </div>
+    </div>
+    <div class="tile">
+      <h4>Image</h4>
       <div class="scale">
         <div ref="drawing_div">
           <VueDrawingCanvas ref="VueCanvasDrawing" v-model:image="image" width="512" height="512" :background-image="backgroundImage" :styles="{
             'border': 'solid 1px #000'
           }" />
         </div>
-      </div>
-    </div>
-    <div class="tile">
-      <h4>DFT</h4>
-      <div class="scale">
-        <ReglFftCanvas :src="drawing_canvas" :image="image">
-
-        </ReglFftCanvas>
       </div>
     </div>
     <div class="tile">
@@ -60,14 +67,7 @@ async function setImage(event) {
         </RealSpaceCtfCanvas>
       </div>
     </div>
-    <div class="tile">
-      <h4>DFT*CTF</h4>
-      <div class="scale">
-        <ReglFftCtfCanvas :src="drawing_canvas" :image="image">
-
-        </ReglFftCtfCanvas>
-      </div>
-    </div>
+    
 
   </main>
 </template>
@@ -77,12 +77,17 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   /* Set ap to 2rem */
-  grid-gap: 2rem;
+  grid-gap: 1rem;
 }
 
 .scale {
-  transform: scale(0.5);
-  margin: -130px;
+  transform: scale(0.4);
+  margin: -150px;
+}
+
+.scalemore {
+  transform: scale(0.4);
+  margin: -150px;
 }
 
 .tile h4 {

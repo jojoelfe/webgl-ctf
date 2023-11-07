@@ -22,6 +22,8 @@ const params = useParameterStore();
 // Create 100 values between 0 and 0.5
 const x_values = Array.from(Array(1000).keys()).map(x => x / 2000)
 
+const x_labels = computed(() => x_values.map(x => (1 / (x / params.pixel_size)).toFixed(2)))
+
 // Create a computed dataset from x_values
 const wavelength = computed(() => 12.2639 / Math.sqrt(1000.0 * params.voltage + 0.97845e-6 * Math.pow(1000.0 *
 params.voltage, 2.0)))
@@ -33,7 +35,7 @@ const ctf_values = computed(() => phase_shift.value.map(x => - Math.sin( x)))
 const powerspectrum_values = computed(() => ctf_values.value.map(x => Math.pow(x,2)))
 
 const data = computed(() => ({
-  labels: x_values,
+  labels: x_labels.value,
   datasets: [
     {
       label: "CTF",
@@ -64,7 +66,14 @@ const options = {
   scales: {
     y: {
       min: -1.02,
-      max: 1.02
+      max: 1.02,
+      
+    },
+    x: {
+      title: {
+        display: true,
+        text: 'Spatial resolution (Å)'
+      },
     }
   }
 

@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import "@spectrum-web-components/slider/sp-slider.js";
-import "@spectrum-web-components/radio/sp-radio.js";
-import "@spectrum-web-components/radio/sp-radio-group.js";
-import slider from "@/components/Slider.vue";
+import VueSlider from 'vue-slider-component';
+import 'vue-slider-component/theme/default.css';
 import { ref } from "vue";
 import { useParameterStore } from '@/stores/parameters';
 import ImageAberrationView from "./views/ImageAberrationView.vue";
@@ -10,100 +8,26 @@ import ImageAberrationView from "./views/ImageAberrationView.vue";
 
 const parameters = useParameterStore();
 
-
-function set_defocus(event) {
-  if (!isNaN(event)) {
-    parameters.defocus = event;
-  }
-}
 </script>
 
 <template>
   <div class="main">
     <div class="wrapper">
       <h1>The Contrast Transfer Function</h1>
-      <slider v-on:input="set_defocus" />
-      <sp-slider
-        style="width: 300px"
-        max="100000"
-        step="100"
-        value="0.0"
-        v-on:input="parameters.astigmatism = $event.target.value"
-        format-options='{
-        "style": "unit",
-        "unit": "Å"
-    }'
-        >Astigmatism</sp-slider
-      >
-      <sp-slider
-        style="width: 300px"
-        max="180"
-        step="1"
-        value="0"
-        v-on:input="parameters.astigmatism_angle = $event.target.value"
-        format-options='{
-        "style": "unit",
-        "unit": "°"
-    }'
-        >Astigmatism angle</sp-slider
-      >
-      <sp-slider
-        style="width: 300px"
-        max="10"
-        step="0.1"
-        value="1.0"
-        v-on:input="parameters.pixel_size = $event.target.value"
-        format-options='{
-        "style": "unit",
-        "unit": "Å"
-    }'
-        >Pixel size</sp-slider
-      >
-      <sp-slider
-        style="width: 300px"
-        max="1"
-        step="0.01"
-        value="0.07"
-        v-on:input="parameters.ac = $event.target.value"
-        format-options='{
-        "style": "unit",
-        "unit": ""
-    }'
-        >Amplitude contrast</sp-slider
-      >
-      <sp-slider
-        style="width: 300px"
-        max="10.0"
-        step="0.05"
-        value="2.7"
-        v-on:input="parameters.spherical_aberration = $event.target.value"
-        format-options='{
-        "style": "unit",
-        "unit": "mm"
-    }'
-        >Spherical aberration</sp-slider
-      >
-      <sp-slider
-        style="width: 300px"
-        max="1000"
-        step="10"
-        value="300"
-        v-on:input="parameters.voltage = $event.target.value"
-        format-options='{
-        "style": "unit",
-        "unit": "kV"
-    }'
-        >Voltage</sp-slider
-      >
-     
+      <div class="slider-container">
+        <label>Defocus (Å)</label>
+        <vue-slider
+          v-model="parameters.defocus"
+          
+        ></vue-slider>
+      </div>
+
+           
     </div>
 
     <ImageAberrationView />
   </div>
-  <footer>
-    Built by Johannes Elferich based on math in cisTEM by Tim Grant, Niko
-    Grigorieff, Ben Himes, and Alexis Rohou
-  </footer>
+
 </template>
 
 <style>
@@ -227,5 +151,15 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
+}
+
+.slider-container {
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+.slider-container label {
+  display: block;
+  margin-bottom: 5px;
 }
 </style>

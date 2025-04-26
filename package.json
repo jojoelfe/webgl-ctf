@@ -10,15 +10,14 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@spectrum-web-components/radio": "^1.5.0",
-    "@spectrum-web-components/slider": "^1.5.0",
     "glsl-fft": "^1.0.2",
     "is-power-of-two": "^1.0.0",
     "pinia": "^3.0.2",
     "regl": "^2.1.1",
     "shader-doodle": "^1.0.0-alpha.20",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "vue-slider-component": "^3.2.24"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.11.0",

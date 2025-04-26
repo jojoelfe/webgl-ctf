@@ -3,9 +3,9 @@ import "@spectrum-web-components/slider/sp-slider.js";
 import "@spectrum-web-components/radio/sp-radio.js";
 import "@spectrum-web-components/radio/sp-radio-group.js";
 import slider from "@/components/Slider.vue";
-import { RouterView, RouterLink } from "vue-router";
 import { ref } from "vue";
 import { useParameterStore } from '@/stores/parameters';
+import ImageAberrationView from "./views/ImageAberrationView.vue";
 
 
 const parameters = useParameterStore();
@@ -95,16 +95,10 @@ function set_defocus(event) {
     }'
         >Voltage</sp-slider
       >
-      <nav>
-        <RouterLink to="/">Absolute amplitude</RouterLink>
-        <RouterLink to="/amp">Amplitude</RouterLink>
-        <RouterLink to="/imag">Imaginary</RouterLink>
-        <RouterLink to="/phase">Phase shift</RouterLink>
-        <RouterLink to="/image_abb">Image abberation</RouterLink>
-      </nav>
+     
     </div>
 
-    <RouterView />
+    <ImageAberrationView />
   </div>
   <footer>
     Built by Johannes Elferich based on math in cisTEM by Tim Grant, Niko
@@ -114,7 +108,6 @@ function set_defocus(event) {
 
 <style>
 @import "@/assets/base.css";
-@import "@spectrum-web-components/styles/all-medium-light.css";
 
 #app {
   max-width: 1280px;

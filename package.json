@@ -16,8 +16,8 @@
     "regl": "^2.1.1",
     "shader-doodle": "^1.0.0-alpha.20",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.1",
-    "vue-slider-component": "^3.2.24"
+    "vue-3-slider-component": "^1.0.2",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.11.0",
@@ -36,5 +36,6 @@
     "vitest": "^3.1.2",
     "vue-drawing-canvas": "^1.0.14",
     "vue-tsc": "^2.2.10"
-  }
+  },
+  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39"
 }

@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import VueSlider from 'vue-slider-component';
-import 'vue-slider-component/theme/default.css';
-import { ref } from "vue";
+import VueSlider from "vue-3-slider-component";
+
 import { useParameterStore } from '@/stores/parameters';
 import ImageAberrationView from "./views/ImageAberrationView.vue";
 
@@ -13,13 +12,77 @@ const parameters = useParameterStore();
 <template>
   <div class="main">
     <div class="wrapper">
-      <h1>The Contrast Transfer Function</h1>
       <div class="slider-container">
         <label>Defocus (Å)</label>
+        <VueSlider
+          v-model="parameters.defocus"         
+        />
+        <div class="slider-container">
+        <label>Astigmatism (Å)</label>
         <vue-slider
-          v-model="parameters.defocus"
-          
+          v-model="parameters.astigmatism"
+          :min="0"
+          :max="100000"
+          :interval="100"
+          :tooltip="'always'"
         ></vue-slider>
+      </div>
+      
+      <div class="slider-container">
+        <label>Astigmatism angle (°)</label>
+        <vue-slider
+          v-model="parameters.astigmatism_angle"
+          :min="0"
+          :max="180"
+          :interval="1"
+          :tooltip="'always'"
+        ></vue-slider>
+      </div>
+      
+      <div class="slider-container">
+        <label>Pixel size (Å)</label>
+        <vue-slider
+          v-model="parameters.pixel_size"
+          :min="0"
+          :max="10"
+          :interval="0.1"
+          :tooltip="'always'"
+        ></vue-slider>
+      </div>
+      
+      <div class="slider-container">
+        <label>Amplitude contrast</label>
+        <vue-slider
+          v-model="parameters.ac"
+          :min="0"
+          :max="1"
+          :interval="0.01"
+          :tooltip="'always'"
+        ></vue-slider>
+      </div>
+      
+      <div class="slider-container">
+        <label>Spherical aberration (mm)</label>
+        <vue-slider
+          v-model="parameters.spherical_aberration"
+          :min="0"
+          :max="10.0"
+          :interval="0.05"
+          :tooltip="'always'"
+        ></vue-slider>
+      </div>
+      
+      <div class="slider-container">
+        <label>Voltage (kV)</label>
+        <vue-slider
+          v-model="parameters.voltage"
+          :min="0"
+          :max="1000"
+          :interval="10"
+          :tooltip="'always'"
+        ></vue-slider>
+      </div>
+
       </div>
 
            
